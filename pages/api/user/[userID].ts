@@ -16,6 +16,7 @@ const handler = async (
       .json({ message: `You are not authorized to do that :(` });
   }
   const { uID } = req.query;
+  console.log(req.query)
   const foundUser: any = User.findById(uID).lean();
 
   if (!foundUser) {

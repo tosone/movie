@@ -5,10 +5,7 @@ import Movie, { MovieType, ReviewType } from '../../models/movie';
 import dbConnect from '../../utils/dbConnect';
 import { ReviewEndpointBodyType } from '../../types/APITypes';
 
-const handler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void | NextApiResponse<any>> => {
+const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void | NextApiResponse<any>> => {
   await dbConnect();
   if (req.method === `POST`) {
     const { comment, rating, movieID }: ReviewEndpointBodyType = JSON.parse(
@@ -49,7 +46,7 @@ const handler = async (
         Math.round(
           (movie.reviews.reduce<number>((a, b) => a + b.rating, 0) /
             movie.reviews.length) *
-            10
+          10
         ) / 10;
       movie.markModified(`reviews`);
       await movie.save();

@@ -39,19 +39,19 @@ function EditUser({ desiredUser, movies }: EditUserProps): React.ReactNode {
 
   const allRatings: (
     | (ReviewType<PopulatedUserType> & {
-        movie?: { name: string; image?: string };
-      })
+      movie?: { name: string; image?: string };
+    })
     | null
   )[] = movies
     .map((movie) => {
       const rev:
         | (ReviewType<PopulatedUserType> & {
-            movie?: { name: string; image?: string };
-          })
+          movie?: { name: string; image?: string };
+        })
         | undefined = movie?.reviews?.find((review) => {
-        if (!review.user) return false; // If user is deleted and has made a review the user object is null in the review.
-        return review.user._id === desiredUser._id;
-      });
+          if (!review.user) return false; // If user is deleted and has made a review the user object is null in the review.
+          return review.user._id === desiredUser._id;
+        });
       if (!rev) {
         return null;
       }
@@ -85,9 +85,7 @@ interface returnProps {
   };
 }
 
-export async function getServerSideProps(
-  ctx: GetServerSidePropsContext
-): Promise<returnProps> {
+export async function getServerSideProps(ctx: GetServerSidePropsContext): Promise<returnProps> {
   const { uID } = ctx.query;
   await dbConnect();
   const session = await getSession(ctx);

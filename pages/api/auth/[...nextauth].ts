@@ -43,6 +43,38 @@ export default NextAuth({
         };
       },
     }),
+    Providers.GitHub({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      async profile(profile: any): Promise<any> {
+        // if (profile.avatar === null) {
+        //   const defaultAvatarNumber = parseInt(profile?.discriminator) % 5;
+        //   profile.image_url = `https://cdn.discordapp.com/embed/avatars/${defaultAvatarNumber}.png`;
+        // } else {
+        //   const format = profile.avatar.startsWith('a_') ? 'gif' : 'png';
+        //   profile.image_url = `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.${format}`;
+        // }
+        console.log(profile);
+        return {
+          id: profile.id,
+          discord_id: profile.id,
+          name: profile.username,
+          image: profile.image_url,
+          avatar: profile.avatar,
+          discriminator: profile.discriminator,
+          public_flags: profile.public_flags,
+          flags: profile.flags,
+          email: profile.email,
+          locale: profile.locale,
+          mfa_enabled: profile.mfa_enabled,
+          premium_type: profile.premium_type,
+          isAdmin: false,
+          isReviewer: false,
+          isBanned: false,
+          username: profile.username,
+        };
+      },
+    })
   ],
   // Database optional. MySQL, Maria DB, Postgres and MongoDB are supported.
   // https://next-auth.js.org/configuration/databases

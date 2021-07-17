@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import movie from '../models/movie';
 import user from '../models/user';
 
