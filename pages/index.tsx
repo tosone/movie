@@ -1,14 +1,15 @@
 import React from 'react';
-import { useQuery } from 'react-query';
-import HomePage from '../components/HomePage';
-import LandingPage from '../components/LandingPage';
-import { getMovies } from '../utils/queries';
-import BannedPage from '../components/BannedPage';
-import { ReviewType, SerializedMovieType } from '../models/movie';
-import { getSession, useSession } from 'next-auth/client';
-import { PopulatedUserType } from '../models/user';
-import { GetServerSidePropsContext } from 'next';
 import { Session } from 'next-auth';
+import { useQuery } from 'react-query';
+import { GetServerSidePropsContext } from 'next';
+import { getSession, useSession } from 'next-auth/client';
+
+import { getMovies } from '../utils/queries';
+import HomePage from '../components/HomePage';
+import BannedPage from '../components/BannedPage';
+import { PopulatedUserType } from '../models/user';
+import LandingPage from '../components/LandingPage';
+import { ReviewType, SerializedMovieType } from '../models/movie';
 
 interface HomePageProps {
   movies: SerializedMovieType<ReviewType<PopulatedUserType>[]>[];
@@ -17,19 +18,18 @@ interface HomePageProps {
 export default function Home({ movies }: HomePageProps): React.ReactNode {
   const [session, loading] = useSession();
 
-  const { data } = useQuery(`movies`, getMovies, {
-    initialData: movies,
-  });
+  const { data } = useQuery(`movies`, getMovies, { initialData: movies });
 
   if (typeof window !== 'undefined' && loading) return null;
 
   if (!session?.user) {
     return <LandingPage />;
   }
+
   if (session?.user?.isBanned) {
     return <BannedPage user={session.user} />;
   }
-  //idk typescript well enough to know whats goin wrong here but | any ignores it :/ :(
+  // idk typescript well enough to know whats goin wrong here but | any ignores it :/ :(
   // eslint-disable-next-line react-hooks/rules-of-hooks
 
   if (!data) {
@@ -47,7 +47,7 @@ export const getServerSideProps = async (
     movies: SerializedMovieType<ReviewType<PopulatedUserType>[]>[];
   };
 }> => {
-  //Scuffed, but makes sure that Schema gets registered before next-auth tries to access it.
+  // Scuffed, but makes sure that Schema gets registered before next-auth tries to access it.
   const movies = await getMovies();
   const session = await getSession(ctx);
 

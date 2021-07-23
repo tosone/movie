@@ -1,19 +1,20 @@
 import React from 'react';
-import { GetServerSidePropsContext } from 'next';
-import { Flex, Heading, Text, useColorMode } from '@chakra-ui/react';
 import { format } from 'date-fns';
-import UserTable from '../components/UserTable';
-import AppLayout from '../components/AppLayout';
-import { getFlags } from '../utils/userFlags';
-import { SerializedUser } from '../models/user';
-import BannedPage from '../components/BannedPage';
 import { NextSeo } from 'next-seo';
-import { getSession, useSession } from 'next-auth/client';
+import { Session } from 'next-auth';
+import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
+import { GetServerSidePropsContext } from 'next';
+import { getSession, useSession } from 'next-auth/client';
+import { Flex, Heading, Text, useColorMode } from '@chakra-ui/react';
+
 import dbConnect from '../utils/dbConnect';
 import { getUsers } from '../utils/queries';
-import { useQuery } from 'react-query';
-import { Session } from 'next-auth';
+import { getFlags } from '../utils/userFlags';
+import UserTable from '../components/UserTable';
+import AppLayout from '../components/AppLayout';
+import { SerializedUser } from '../models/user';
+import BannedPage from '../components/BannedPage';
 
 interface UsersProps {
   users: SerializedUser[];

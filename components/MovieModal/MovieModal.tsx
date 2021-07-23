@@ -18,10 +18,9 @@ import {
   useColorModeValue,
   Flex,
 } from '@chakra-ui/react';
-
+import { useQueryClient } from 'react-query';
 import { AddIcon, SearchIcon } from '@chakra-ui/icons';
 
-import { useQueryClient } from 'react-query';
 import SearchResults from '../SearchResults';
 import { OMDBMovie, OMDBResponse } from '../../pages/api/movie-api';
 
@@ -29,15 +28,14 @@ export const MovieModal: React.FC = (): React.ReactElement => {
   const [results, setResults] = useState<OMDBMovie[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(``);
-  const [success, setSuccess] = useState<{ type: string; data: any } | null>(
-    null
-  );
+  const [success, setSuccess] = useState<{ type: string; data: any } | null>(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const initialRef = React.useRef(null);
-  const queryClient = useQueryClient();
   const toast = useToast();
+  const queryClient = useQueryClient();
+  const initialRef = React.useRef(null);
+
   useEffect(() => {
     if (success) {
       queryClient.invalidateQueries(`movies`).catch(console.error);

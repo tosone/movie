@@ -1,19 +1,20 @@
-import { Flex, Heading, Text, useColorMode } from '@chakra-ui/react';
-import { GetServerSidePropsContext } from 'next';
+import React, { useEffect } from 'react';
+import Error from 'next/error';
 import { Session } from 'next-auth';
-import { getSession, useSession } from 'next-auth/client';
-import { useRouter } from 'next/router';
-import React from 'react';
-import { useEffect } from 'react';
 import { useQuery } from 'react-query';
+import { useRouter } from 'next/router';
+import { GetServerSidePropsContext } from 'next';
+import { getSession, useSession } from 'next-auth/client';
+import { Flex, Heading, Text, useColorMode } from '@chakra-ui/react';
+
+import { getMovie } from '../../utils/queries';
 import AppLayout from '../../components/AppLayout';
 import BannedPage from '../../components/BannedPage';
+import { PopulatedUserType } from '../../models/user';
 import MovieDetailsSection from '../../components/MovieDetailsSection';
 import MovieReviewSection from '../../components/MovieReviewSection';
 import { ReviewType, SerializedMovieType } from '../../models/movie';
-import { PopulatedUserType } from '../../models/user';
-import { getMovie } from '../../utils/queries';
-import Error from 'next/error';
+
 interface MoviePageProps {
   movie: SerializedMovieType<ReviewType<PopulatedUserType>[]>;
   error?: string;

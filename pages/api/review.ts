@@ -1,9 +1,9 @@
 import { getSession } from 'next-auth/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import Movie, { MovieType, ReviewType } from '../../models/movie';
 import dbConnect from '../../utils/dbConnect';
 import { ReviewEndpointBodyType } from '../../types/APITypes';
+import Movie, { MovieType, ReviewType } from '../../models/movie';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void | NextApiResponse<any>> => {
   await dbConnect();

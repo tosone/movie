@@ -1,14 +1,15 @@
 import React from 'react';
 import { Avatar, Flex, Heading, chakra, VStack, Text } from '@chakra-ui/react';
-import { PopulatedUserType, SerializedUser } from '../../models/user';
+
 import { ReviewType } from '../../models/movie';
+import { PopulatedUserType, SerializedUser } from '../../models/user';
 
 interface AboutUserSectionProps {
   user: SerializedUser;
   reviews: (
     | (ReviewType<PopulatedUserType> & {
-        movie?: { name: string; image?: string };
-      })
+      movie?: { name: string; image?: string };
+    })
     | null
   )[];
 }
@@ -32,11 +33,11 @@ export const AboutUserSection: React.FC<AboutUserSectionProps> = ({
           {reviews.length > 1 ? 's' : ''}{' '}
           {reviews.length > 0 &&
             '·  ' +
-              (
-                reviews.reduce((a, c) => (c?.rating ? a + c?.rating : a), 0) /
-                reviews.length
-              ).toFixed(1) +
-              '    Average Rating'}
+            (
+              reviews.reduce((a, c) => (c?.rating ? a + c?.rating : a), 0) /
+              reviews.length
+            ).toFixed(1) +
+            '    Average Rating'}
         </Text>
       </VStack>
     </Flex>

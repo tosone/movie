@@ -1,5 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
+import { NextApiRequest, NextApiResponse } from 'next';
+
 import dbConnect from '../../utils/dbConnect';
 
 export interface OMDBMovie {
@@ -17,6 +18,7 @@ export interface OMDBMovie {
   video?: boolean;
   vote_average?: number;
 }
+
 export interface OMDBResponse {
   page?: number;
   total_results?: number;

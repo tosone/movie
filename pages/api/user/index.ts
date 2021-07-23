@@ -1,8 +1,9 @@
-import { MongoUser } from './../../../models/user';
+import { getSession } from 'next-auth/client';
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import User from '../../../models/user';
 import dbConnect from '../../../utils/dbConnect';
-import { getSession } from 'next-auth/client';
+import { MongoUser } from './../../../models/user';
 
 const handler = async (
   req: NextApiRequest,

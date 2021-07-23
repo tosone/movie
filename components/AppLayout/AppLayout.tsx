@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Fragment } from 'react';
+
 import Nav from '../Nav';
 import Footer from '../Footer';
 import { UserAuthType } from 'next-auth';
@@ -10,13 +11,8 @@ interface AppLayoutProps {
   showReview?: boolean;
 }
 
-export const AppLayout = ({
-  showMovies,
-  showReview,
-  user,
-  children,
-}: AppLayoutProps): React.ReactElement => (
-  <>
+export const AppLayout = ({ showMovies, showReview, user, children }: AppLayoutProps): React.ReactElement => (
+  <Fragment>
     <Nav
       user={user}
       showMovies={showMovies || false}
@@ -24,5 +20,5 @@ export const AppLayout = ({
     />
     {children}
     <Footer />
-  </>
+  </Fragment>
 );

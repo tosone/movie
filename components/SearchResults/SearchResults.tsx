@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   IconButton,
   Center,
@@ -9,9 +9,9 @@ import {
   AspectRatio,
   Skeleton,
 } from '@chakra-ui/react';
-import { AddIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
-import React from 'react';
+import { AddIcon } from '@chakra-ui/icons';
+
 import { OMDBMovie } from '../../pages/api/movie-api';
 
 function SkeletonImage({ result }: { result: OMDBMovie }) {

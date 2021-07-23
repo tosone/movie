@@ -1,12 +1,4 @@
-import {
-  Box,
-  chakra,
-  useColorModeValue,
-  Text,
-  Button,
-  Icon,
-  Flex,
-} from '@chakra-ui/react';
+import { Box, chakra, useColorModeValue, Text, Button, Icon, Flex } from '@chakra-ui/react';
 import { signIn } from 'next-auth/client';
 
 export const LandingPage: React.FC = (): React.ReactElement => {

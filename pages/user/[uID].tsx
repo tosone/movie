@@ -1,20 +1,17 @@
+import { useRouter } from 'next/router';
+import type { Session } from 'next-auth';
 import React, { useEffect } from 'react';
 import { Divider, Flex } from '@chakra-ui/react';
+import type { GetServerSidePropsContext } from 'next';
+import { getSession, useSession } from 'next-auth/client';
+
+import dbConnect from '../../utils/dbConnect';
+import { getMovies } from '../../utils/queries';
 import AppLayout from '../../components/AppLayout';
 import AboutUserSection from '../../components/AboutUserSection';
-import User, {
-  MongoUser,
-  PopulatedUserType,
-  SerializedUser,
-} from '../../models/user';
-import { getMovies } from '../../utils/queries';
-import { ReviewType, SerializedMovieType } from '../../models/movie';
 import UserReviewSection from '../../components/UserReviewSection';
-import type { GetServerSidePropsContext } from 'next';
-import dbConnect from '../../utils/dbConnect';
-import { getSession, useSession } from 'next-auth/client';
-import type { Session } from 'next-auth';
-import { useRouter } from 'next/router';
+import { ReviewType, SerializedMovieType } from '../../models/movie';
+import User, { MongoUser, PopulatedUserType, SerializedUser } from '../../models/user';
 
 interface EditUserProps {
   desiredUser: SerializedUser | null;

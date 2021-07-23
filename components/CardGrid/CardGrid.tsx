@@ -1,41 +1,23 @@
 import {
-  Container,
-  SimpleGrid,
-  Box,
-  Flex,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  Button,
-  Heading,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  chakra,
-  useColorModeValue,
-  useToast,
-  useColorMode,
-  Stack,
-  IconButton,
-  Tooltip,
-  useBreakpoint,
+  Container, SimpleGrid, Box, Flex, InputGroup, InputLeftElement,
+  Input, Button, Heading, Menu, MenuButton, MenuItem, MenuList,
+  chakra, useColorModeValue, useToast, useColorMode,
+  Stack, IconButton, Tooltip, useBreakpoint,
 } from '@chakra-ui/react';
-import 'react-toggle/style.css';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { BiChevronDown } from 'react-icons/bi';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import Card from '../Card';
-import { ReviewType, SerializedMovieType } from '../../models/movie';
-import { PopulatedUserType } from '../../models/user';
-import { NextSeo } from 'next-seo';
-import ReviewModal from '../ReviewModal';
 import Link from 'next/link';
+import 'react-toggle/style.css';
+import { NextSeo } from 'next-seo';
 import { UserAuthType } from 'next-auth';
+import { useState, useEffect } from 'react';
+import { BiChevronDown } from 'react-icons/bi';
+import { AiOutlineSearch } from 'react-icons/ai';
 
+import Card from '../Card';
+import ReviewModal from '../ReviewModal';
 import MovieGridView from '../MovieGridView';
+import { PopulatedUserType } from '../../models/user';
 import { BsCardImage, BsGrid3X3 } from 'react-icons/bs';
+import { ReviewType, SerializedMovieType } from '../../models/movie';
 
 interface CardGridProps {
   movies: SerializedMovieType<ReviewType<PopulatedUserType>[]>[];

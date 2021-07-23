@@ -1,14 +1,12 @@
+import axios from 'axios';
 import { getSession } from 'next-auth/client';
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
-import Movie, { MovieType } from '../../models/movie';
+
 import dbConnect from '../../utils/dbConnect';
+import Movie, { MovieType } from '../../models/movie';
 import { MovieEndpointBodyType } from '../../types/APITypes';
 
-const MovieAPI = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void | NextApiResponse<any>> => {
+const MovieAPI = async (req: NextApiRequest, res: NextApiResponse): Promise<void | NextApiResponse<any>> => {
   await dbConnect();
   if (req.method === `POST`) {
     const { id: movieID }: MovieEndpointBodyType = JSON.parse(req.body);

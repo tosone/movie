@@ -1,23 +1,22 @@
-import { useEffect } from 'react';
-import { useColorMode, useToast } from '@chakra-ui/react';
-import AppLayout from '../AppLayout';
-import CardGrid from '../CardGrid';
-import { ReviewType, SerializedMovieType } from '../../models/movie';
-import { UserAuthType } from 'next-auth';
 import { NextSeo } from 'next-seo';
+import { UserAuthType } from 'next-auth';
+import { Fragment, useEffect } from 'react';
+import { useColorMode, useToast } from '@chakra-ui/react';
+
+import CardGrid from '../CardGrid';
+import AppLayout from '../AppLayout';
 import { PopulatedUserType } from '../../models/user';
+import { ReviewType, SerializedMovieType } from '../../models/movie';
+import StorageModal from '../StorageModal';
 
 interface HomePageProps {
   user: UserAuthType;
   movies: SerializedMovieType<ReviewType<PopulatedUserType>[]>[];
 }
 
-export const HomePage: React.FC<HomePageProps> = ({
-  user,
-  movies,
-}): React.ReactElement => {
-  const { colorMode } = useColorMode();
+export const HomePage: React.FC<HomePageProps> = ({ user, movies }): React.ReactElement => {
   const toast = useToast();
+  const { colorMode } = useColorMode();
   // Fix for https://github.com/chakra-ui/chakra-ui/issues/3076
   useEffect(() => {
     toast.update(`test`, {
@@ -45,14 +44,13 @@ export const HomePage: React.FC<HomePageProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <>
+    <Fragment>
       <NextSeo title="Home" />
-
       <AppLayout user={user} showMovies>
         <div>
           <CardGrid movies={movies} user={user} />
         </div>
       </AppLayout>
-    </>
+    </Fragment>
   );
 };

@@ -1,11 +1,12 @@
+import { JWT } from 'next-auth/jwt';
 import NextAuth, { User } from 'next-auth';
 import Providers from 'next-auth/providers';
-import Models from '../../../models';
 //@ts-ignore
 import { TypeORMLegacyAdapter } from '@next-auth/typeorm-legacy-adapter';
+
+import Models from '../../../models';
 import dbConnect from '../../../utils/dbConnect';
 import user from '../../../models/user';
-import { JWT } from 'next-auth/jwt';
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options

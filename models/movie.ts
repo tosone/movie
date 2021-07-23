@@ -39,8 +39,7 @@ const movieSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose?.models?.Movie ||
-  mongoose.model<MovieType>(`Movie`, movieSchema);
+export default mongoose?.models?.Movie || mongoose.model<MovieType>(`Movie`, movieSchema);
 
 export interface ReviewType<T = PopulatedUserType> {
   user: T extends string ? T : T | null;

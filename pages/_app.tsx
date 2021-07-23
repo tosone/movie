@@ -1,29 +1,25 @@
-import '../styles/globals.css';
 import { AppProps } from 'next/app';
-import { ChakraProvider, useDisclosure } from '@chakra-ui/react';
+import { DefaultSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import PlausibleProvider from 'next-plausible';
+import React, { useState, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider as NextAuthProvider } from 'next-auth/client';
-import PlausibleProvider from 'next-plausible';
-import { DefaultSeo } from 'next-seo';
-import { ReviewModalContext } from '../utils/ModalContext';
-import React, { useState, useEffect } from 'react';
+import { ChakraProvider, useDisclosure } from '@chakra-ui/react';
+
+import '../styles/globals.css';
 import theme from '../styles/theme';
-import { ReviewType, SerializedMovieType } from '../models/movie';
 import { PopulatedUserType } from '../models/user';
-import { useRouter } from 'next/router';
+import { ReviewModalContext } from '../utils/ModalContext';
+import { ReviewType, SerializedMovieType } from '../models/movie';
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactChild {
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const [movie, setMovie] = useState<SerializedMovieType<
-    ReviewType<PopulatedUserType>[]
-  > | null>(null);
+  const [movie, setMovie] = useState<SerializedMovieType<ReviewType<PopulatedUserType>[]> | null>(null);
   const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'ScuffedMDB';
-  const shortSiteName =
-    process.env.NEXT_PUBLIC_SHORT_SITE_NAME ||
-    process.env.NEXT_PUBLIC_SITE_NAME ||
-    'SMDB';
+  const shortSiteName = process.env.NEXT_PUBLIC_SHORT_SITE_NAME || process.env.NEXT_PUBLIC_SITE_NAME || 'SMDB';
 
   const router = useRouter();
   useEffect(() => {
@@ -31,8 +27,7 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactChild {
       (document.getElementById('__next') as HTMLElement).scrollTop = 0;
     }
   }, [router.pathname]);
-  const siteURI =
-    process.env.NEXT_PUBLIC_APP_URI || 'https://www.movie.michael-hall.me';
+  const siteURI = process.env.NEXT_PUBLIC_APP_URI || 'https://www.movie.michael-hall.me';
   return (
     <>
       <DefaultSeo

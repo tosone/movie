@@ -16,12 +16,15 @@ import {
   Heading,
   useBreakpointValue,
 } from '@chakra-ui/react';
-import { IoMoon, IoSunny } from 'react-icons/io5';
 import Link from 'next/link';
-import MovieModal from '../MovieModal';
+import { Fragment } from 'react';
 import { UserAuthType } from 'next-auth';
-import ReviewModal from '../ReviewModal';
 import { signout } from 'next-auth/client';
+import { IoMoon, IoSunny } from 'react-icons/io5';
+
+import MovieModal from '../MovieModal';
+import ReviewModal from '../ReviewModal';
+import StorageModal from '../StorageModal';
 
 interface NavProps {
   user: UserAuthType;
@@ -29,11 +32,7 @@ interface NavProps {
   showReview: boolean;
 }
 
-export const Nav: React.FC<NavProps> = ({
-  user,
-  showMovies,
-  showReview,
-}): React.ReactElement => {
+export const Nav: React.FC<NavProps> = ({ user, showMovies, showReview }): React.ReactElement => {
   const links = [
     { link: `/`, name: `Home` },
     { link: `/user/${user?.sub}`, name: `My Reviews` },
@@ -43,7 +42,7 @@ export const Nav: React.FC<NavProps> = ({
   const siteName = process.env.NEXT_PUBLIC_SITE_NAME;
   const shortSiteName = process.env.NEXT_PUBLIC_SHORT_SITE_NAME;
   return (
-    <>
+    <Fragment>
       <Box
         width="100vw"
         borderTop={'5px solid'}
@@ -87,6 +86,7 @@ export const Nav: React.FC<NavProps> = ({
                 <ReviewModal isAdmin={user.isAdmin} inNav />
               )}
               {user.isAdmin && showMovies && <MovieModal />}
+              <StorageModal />
             </Stack>
 
             <Menu>
@@ -123,6 +123,6 @@ export const Nav: React.FC<NavProps> = ({
           </Stack>
         </Flex>
       </Box>
-    </>
+    </Fragment>
   );
 };
