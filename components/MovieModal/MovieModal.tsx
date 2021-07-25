@@ -1,33 +1,19 @@
-import React, { FormEvent, useEffect, useState } from 'react';
-import {
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  useToast,
-  useColorModeValue,
-  Flex,
-} from '@chakra-ui/react';
 import { useQueryClient } from 'react-query';
 import { AddIcon, SearchIcon } from '@chakra-ui/icons';
+import React, { FormEvent, useEffect, useState } from 'react';
+import {
+  useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter,
+  ModalBody, ModalCloseButton, Button, FormControl, FormLabel, Input, InputGroup,
+  InputLeftElement, useToast, useColorModeValue, Flex,
+} from '@chakra-ui/react';
 
 import SearchResults from '../SearchResults';
 import { OMDBMovie, OMDBResponse } from '../../pages/api/movie-api';
 
 export const MovieModal: React.FC = (): React.ReactElement => {
-  const [results, setResults] = useState<OMDBMovie[]>([]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(``);
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState<OMDBMovie[]>([]);
   const [success, setSuccess] = useState<{ type: string; data: any } | null>(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();

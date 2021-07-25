@@ -1,5 +1,5 @@
-import { Box, chakra, useColorModeValue, Text, Button, Icon, Flex } from '@chakra-ui/react';
 import { signIn } from 'next-auth/client';
+import { Box, chakra, useColorModeValue, Text, Button, Icon, Flex } from '@chakra-ui/react';
 
 export const LandingPage: React.FC = (): React.ReactElement => {
   const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'ScuffedMDB';

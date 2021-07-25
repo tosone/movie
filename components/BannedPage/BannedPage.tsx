@@ -1,10 +1,8 @@
 import React from 'react';
-import { Flex, Heading, Link, Text, useColorModeValue } from '@chakra-ui/react';
 import { UserAuthType } from 'next-auth';
+import { Flex, Heading, Link, Text, useColorModeValue } from '@chakra-ui/react';
 
-export const BannedPage: React.FC<{ user: UserAuthType }> = ({
-  user,
-}): React.ReactElement => {
+export const BannedPage: React.FC<{ user: UserAuthType }> = ({ user }): React.ReactElement => {
   return (
     <Flex
       direction="column"

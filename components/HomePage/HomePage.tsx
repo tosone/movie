@@ -7,7 +7,6 @@ import CardGrid from '../CardGrid';
 import AppLayout from '../AppLayout';
 import { PopulatedUserType } from '../../models/user';
 import { ReviewType, SerializedMovieType } from '../../models/movie';
-import StorageModal from '../StorageModal';
 
 interface HomePageProps {
   user: UserAuthType;

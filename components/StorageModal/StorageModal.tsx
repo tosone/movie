@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { AddIcon } from '@chakra-ui/icons';
 import React, { Fragment, useState } from 'react';
 import {
   useDisclosure, Modal, ModalOverlay,
@@ -6,7 +7,6 @@ import {
   ModalCloseButton, Button, FormControl, FormLabel,
   Input, useToast, useColorModeValue, Select
 } from '@chakra-ui/react';
-import { AddIcon } from '@chakra-ui/icons';
 
 export const StorageModal: React.FC = (): React.ReactElement => {
   const { isOpen, onOpen, onClose } = useDisclosure();

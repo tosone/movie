@@ -14,10 +14,7 @@ interface AboutUserSectionProps {
   )[];
 }
 
-export const AboutUserSection: React.FC<AboutUserSectionProps> = ({
-  user,
-  reviews,
-}): React.ReactElement => {
+export const AboutUserSection: React.FC<AboutUserSectionProps> = ({ user, reviews }): React.ReactElement => {
   return (
     <Flex justifyContent="center">
       <Avatar mr={10} size="2xl" src={user.image} />

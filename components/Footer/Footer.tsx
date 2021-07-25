@@ -1,26 +1,9 @@
-import {
-  Box,
-  Flex,
-  chakra,
-  Stack,
-  Text,
-  Tooltip,
-  useColorModeValue,
-  VisuallyHidden,
-} from '@chakra-ui/react';
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { Box, Flex, chakra, Stack, Text, Tooltip, useColorModeValue, VisuallyHidden } from '@chakra-ui/react';
 
-const SocialIcons = ({
-  children,
-  href,
-  label,
-}: {
-  children: React.ReactNode;
-  href: string;
-  label: string;
-}) => {
+const SocialIcons = ({ children, href, label }: { children: React.ReactNode; href: string; label: string; }) => {
   return (
     <Tooltip label={label}>
       <chakra.button
@@ -45,6 +28,7 @@ const SocialIcons = ({
     </Tooltip>
   );
 };
+
 export const Footer: React.FC = (): React.ReactElement => {
   const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'ScuffedMDB';
 

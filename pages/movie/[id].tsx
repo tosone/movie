@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
 import Error from 'next/error';
 import { Session } from 'next-auth';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import { GetServerSidePropsContext } from 'next';
 import { getSession, useSession } from 'next-auth/client';
 import { Flex, Heading, Text, useColorMode } from '@chakra-ui/react';

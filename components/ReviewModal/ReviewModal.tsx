@@ -1,34 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AddIcon } from '@chakra-ui/icons';
 import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Select,
-  Slider,
-  SliderFilledTrack,
-  SliderTrack,
-  SliderThumb,
-  useColorModeValue,
-  Flex,
-  Text,
-  Textarea,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Heading,
-  useToast,
-  useColorMode,
+  Box, Button, FormControl, FormLabel, Modal, ModalBody, ModalCloseButton,
+  ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Slider,
+  SliderFilledTrack, SliderTrack, SliderThumb, useColorModeValue, Flex,
+  Text, Textarea, NumberInput, NumberInputField, NumberInputStepper,
+  NumberIncrementStepper, NumberDecrementStepper, Heading, useToast, useColorMode,
 } from '@chakra-ui/react';
 
 import { useQuery, useQueryClient } from 'react-query';
@@ -38,14 +15,9 @@ import { getMovies } from '../../utils/queries';
 import { ReviewEndpointBodyType } from '../../types/APITypes';
 import { ReviewModalContext } from '../../utils/ModalContext';
 
-export const ReviewModal: React.FC<{ isAdmin: boolean; inNav?: boolean }> = ({
-  isAdmin,
-  inNav = false,
-}): React.ReactElement => {
+export const ReviewModal: React.FC<{ isAdmin: boolean; inNav?: boolean }> = ({ isAdmin, inNav = false }): React.ReactElement => {
   const { colorMode } = useColorMode();
-  const { isOpen, onOpen, onClose, movie, setMovie } = useContext(
-    ReviewModalContext
-  );
+  const { isOpen, onOpen, onClose, movie, setMovie } = useContext(ReviewModalContext);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState(``);
   const [commentError, setCommentError] = useState(``);
@@ -75,10 +47,7 @@ export const ReviewModal: React.FC<{ isAdmin: boolean; inNav?: boolean }> = ({
   }, [movie, queryClient, success, toast]);
 
   const { data: movies } = useQuery(`movies`, getMovies);
-  const handleSubmit = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    onClose: () => void
-  ) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, onClose: () => void) => {
     e.preventDefault();
     if (!movie) {
       return setMovieError(`Please select a valid movie.`);

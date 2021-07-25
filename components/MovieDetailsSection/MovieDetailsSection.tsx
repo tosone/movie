@@ -1,77 +1,41 @@
-import {
-  Flex,
-  Box,
-  AspectRatio,
-  Tag,
-  Stack,
-  TagLabel,
-  useMediaQuery,
-  Heading,
-  VStack,
-  Text,
-  chakra,
-  StatGroup,
-  Stat,
-  StatLabel,
-  StatNumber,
-  Button,
-  Icon,
-  useBreakpoint,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  MenuDivider,
-  useColorMode,
-  useToast,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import { format } from 'date-fns';
-import millify from 'millify';
 import Link from 'next/link';
-
+import millify from 'millify';
 import Image from 'next/image';
-import React, { ReactElement, useContext } from 'react';
+import { format } from 'date-fns';
 import { FaImdb } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+import { UserAuthType } from 'next-auth';
+import { useQueryClient } from 'react-query';
+import { IoChevronDown } from 'react-icons/io5';
+import { SettingsIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, AddIcon } from '@chakra-ui/icons';
+import { ExternalLinkIcon, EditIcon } from '@chakra-ui/icons';
+import React, { ReactElement, useContext, useEffect } from 'react';
+import {
+  Flex, Box, AspectRatio, Tag, Stack, TagLabel, useMediaQuery, Heading,
+  VStack, Text, chakra, StatGroup, Stat, StatLabel, StatNumber, Button,
+  Icon, useBreakpoint, IconButton, Menu, MenuButton, MenuItem, MenuList,
+  MenuDivider, useColorMode, useToast, AlertDialog, AlertDialogBody, AlertDialogContent,
+  AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, useColorModeValue,
+} from '@chakra-ui/react';
+
 import { ReviewType, SerializedMovieType } from '../../models/movie';
 import { PopulatedUserType } from '../../models/user';
 import { getColorSchemeCharCode } from '../../utils/utils';
-import { IoChevronDown } from 'react-icons/io5';
-
 import useScrollPosition from '../../hooks/useScrollPosition.hook';
-import { AddIcon } from '@chakra-ui/icons';
 import { ReviewModalContext } from '../../utils/ModalContext';
-import { ExternalLinkIcon, EditIcon } from '@chakra-ui/icons';
-import { useQueryClient } from 'react-query';
-import { useRouter } from 'next/router';
-import { SettingsIcon } from '@chakra-ui/icons';
-import { UserAuthType } from 'next-auth';
-import { ArrowBackIcon } from '@chakra-ui/icons';
-import { useEffect } from 'react';
 
 interface Props {
   movie: SerializedMovieType<ReviewType<PopulatedUserType>[]>;
   user: UserAuthType;
 }
 
-//TODO: Add SEO here
-export default function MovieDetailsSection({
-  movie,
-  user,
-}: Props): ReactElement {
+// TODO: Add SEO here
+export default function MovieDetailsSection({ movie, user }: Props): ReactElement {
   const bp = useBreakpoint();
   const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
 
-  const userReview = movie.reviews.find(
-    (rating) => rating?.user?._id === user.sub
-  );
+  const userReview = movie.reviews.find((rating) => rating?.user?._id === user.sub);
   const toast = useToast();
   const router = useRouter();
   const { review } = router.query;
@@ -99,23 +63,16 @@ export default function MovieDetailsSection({
   const averageReview =
     movie.reviews.length > 0
       ? (
-          movie.reviews.reduce((a, c) => a + c.rating, 0) / movie.reviews.length
-        ).toFixed(1)
+        movie.reviews.reduce((a, c) => a + c.rating, 0) / movie.reviews.length
+      ).toFixed(1)
       : false;
   const { scrollPosition } = useScrollPosition();
 
-  const { onOpen: reviewOnOpen, setMovie: setModalMovie } = useContext(
-    ReviewModalContext
-  );
+  const { onOpen: reviewOnOpen, setMovie: setModalMovie } = useContext(ReviewModalContext);
 
   return (
     <Box maxWidth="7xl" mx={'auto'}>
-      <Flex
-        direction="column"
-        minHeight="calc(100vh - 80px)"
-        width="full"
-        justifyContent="flex-start"
-      >
+      <Flex direction="column" minHeight="calc(100vh - 80px)" width="full" justifyContent="flex-start" >
         {/* Scroll down section */}
         {bp && !['base', 'sm', 'md'].includes(bp) && (
           <Flex
@@ -140,77 +97,32 @@ export default function MovieDetailsSection({
             />
           </Flex>
         )}
-        <Box
-          mt={{
-            base: '5',
-            md: 'calc(100vh / 15)',
-            xl: 'calc(calc(100vh / 3) - 270px)',
-          }}
-        >
+        <Box mt={{ base: '5', md: 'calc(100vh / 15)', xl: 'calc(calc(100vh / 3) - 270px)' }} >
           <MovieAdminOptions isAdmin={user.isAdmin} movie={movie} />
           <Flex direction={{ base: 'column', lg: 'row' }}>
-            <Flex
-              width={{ base: '90%', lg: '50%' }}
-              mx="auto"
-              maxWidth="full"
-              pr={{ base: 0, lg: '20px' }}
-            >
-              <AspectRatio
-                borderRadius="xl"
-                shadow={'6px 8px 19px 4px rgba(0, 0, 0, 0.25)'}
-                ratio={16 / 9}
-                width="full"
-                height="full"
-              >
-                <Image
-                  className={'borderRadius-xl'}
-                  src={movie?.image || ''}
-                  alt={`${movie.name} poster`}
-                  sizes={'50vw'}
-                  layout="fill"
-                ></Image>
+            <Flex width={{ base: '90%', lg: '50%' }} mx="auto" maxWidth="full" pr={{ base: 0, lg: '20px' }} >
+              <AspectRatio borderRadius="xl" shadow={'6px 8px 19px 4px rgba(0, 0, 0, 0.25)'} ratio={16 / 9} width="full" height="full" >
+                <Image className={'borderRadius-xl'} src={movie?.image || ''} alt={`${movie.name} poster`} sizes={'50vw'} layout="fill" ></Image>
               </AspectRatio>
             </Flex>
-            <VStack
-              mx="auto"
-              pl={{ base: 0, lg: '20px' }}
-              alignItems="flex-start"
-              maxWidth={{ base: '90%', lg: '50%' }}
-            >
+            <VStack mx="auto" pl={{ base: 0, lg: '20px' }} alignItems="flex-start" maxWidth={{ base: '90%', lg: '50%' }} >
               <Stack spacing={3} mt={{ base: '5', lg: 0 }} isInline>
                 {movie?.genres?.slice(0, 4).map((genre, i) => {
                   return (
-                    <Tag
-                      size={isLargerThan800 ? 'md' : 'sm'}
-                      key={i.toString()}
-                      colorScheme={getColorSchemeCharCode(genre)}
-                    >
+                    <Tag size={isLargerThan800 ? 'md' : 'sm'} key={i.toString()} colorScheme={getColorSchemeCharCode(genre)} >
                       <TagLabel fontWeight={'600'}> {genre}</TagLabel>
                     </Tag>
                   );
                 })}
               </Stack>
-              <Heading
-                lineHeight="1.1em"
-                transform={'translateX(-3px)'}
-                fontSize="6xl"
-              >
+              <Heading lineHeight="1.1em" transform={'translateX(-3px)'} fontSize="6xl" >
                 {movie.name}
               </Heading>
-              <Text
-                fontSize="lg"
-                fontStyle="italic"
-                color={'gray.500'}
-                fontWeight="bold"
-              >
+              <Text fontSize="lg" fontStyle="italic" color={'gray.500'} fontWeight="bold" >
                 {movie.tagLine}
               </Text>
               <Text fontSize="lg">{movie.description}</Text>
-              <Flex
-                justifyContent="space-between"
-                width="full"
-                mt={{ base: '20px!important', lg: 'auto!important' }}
-              >
+              <Flex justifyContent="space-between" width="full" mt={{ base: '20px!important', lg: 'auto!important' }} >
                 <VStack spacing={1}>
                   <Text color={'gray.500'} fontSize="sm">
                     Release Date
@@ -225,11 +137,7 @@ export default function MovieDetailsSection({
                   </Text>
                   <Text fontSize="lg" fontWeight="bold">
                     {movie.runtime}{' '}
-                    <chakra.span
-                      color={'gray.500'}
-                      fontWeight="normal"
-                      fontSize="sm"
-                    >
+                    <chakra.span color={'gray.500'} fontWeight="normal" fontSize="sm" >
                       mins
                     </chakra.span>
                   </Text>
@@ -240,11 +148,7 @@ export default function MovieDetailsSection({
                   </Text>
                   <Text color={'gray.500'} fontSize="sm">
                     $
-                    <chakra.span
-                      fontSize="lg"
-                      fontWeight="bold"
-                      color={useColorModeValue('gray.900', 'white')}
-                    >
+                    <chakra.span fontSize="lg" fontWeight="bold" color={useColorModeValue('gray.900', 'white')} >
                       {millify(movie.budget)}
                     </chakra.span>
                   </Text>
@@ -255,11 +159,7 @@ export default function MovieDetailsSection({
                   </Text>
                   <Text color={'gray.500'} fontSize="sm">
                     $
-                    <chakra.span
-                      fontSize="lg"
-                      fontWeight="bold"
-                      color={useColorModeValue('gray.900', 'white')}
-                    >
+                    <chakra.span fontSize="lg" fontWeight="bold" color={useColorModeValue('gray.900', 'white')} >
                       {millify(movie.revenue)}
                     </chakra.span>
                   </Text>
@@ -289,11 +189,7 @@ export default function MovieDetailsSection({
                   {userReview ? (
                     <>
                       {userReview.rating}
-                      <chakra.span
-                        fontWeight="normal"
-                        fontSize="xl"
-                        color={'gray.500'}
-                      >
+                      <chakra.span fontWeight="normal" fontSize="xl" color={'gray.500'} >
                         {' '}
                         /10
                       </chakra.span>
@@ -328,11 +224,7 @@ export default function MovieDetailsSection({
                   {averageReview ? (
                     <>
                       {averageReview}
-                      <chakra.span
-                        fontSize="xl"
-                        fontWeight="normal"
-                        color={'gray.500'}
-                      >
+                      <chakra.span fontSize="xl" fontWeight="normal" color={'gray.500'} >
                         {' '}
                         /10
                       </chakra.span>
@@ -359,11 +251,7 @@ export default function MovieDetailsSection({
                   <chakra.span fontSize="xl">
                     {millify(movie.voteCount)}
                   </chakra.span>
-                  <chakra.span
-                    fontSize="xl"
-                    fontWeight="normal"
-                    color={'gray.500'}
-                  >
+                  <chakra.span fontSize="xl" fontWeight="normal" color={'gray.500'} >
                     {' '}
                     votes
                   </chakra.span>
@@ -412,13 +300,7 @@ export default function MovieDetailsSection({
   );
 }
 
-const MovieAdminOptions = ({
-  isAdmin,
-  movie,
-}: {
-  isAdmin: boolean;
-  movie: SerializedMovieType<ReviewType<PopulatedUserType>[]>;
-}): JSX.Element => {
+const MovieAdminOptions = ({ isAdmin, movie }: { isAdmin: boolean; movie: SerializedMovieType<ReviewType<PopulatedUserType>[]>; }): JSX.Element => {
   const { colorMode } = useColorMode();
 
   const { onOpen: reviewOnOpen, setMovie: setModalMovie } = useContext(
@@ -492,11 +374,7 @@ const MovieAdminOptions = ({
       >
         Back to home
       </Button>
-      <AlertDialog
-        isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-      >
+      <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} >
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">

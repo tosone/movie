@@ -1,26 +1,12 @@
-import {
-  Box,
-  Flex,
-  Avatar,
-  HStack,
-  IconButton,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useColorModeValue,
-  useColorMode,
-  Stack,
-  Heading,
-  useBreakpointValue,
-} from '@chakra-ui/react';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { UserAuthType } from 'next-auth';
 import { signout } from 'next-auth/client';
 import { IoMoon, IoSunny } from 'react-icons/io5';
+import {
+  Box, Flex, Avatar, HStack, IconButton, Button, Menu, MenuButton, MenuList, MenuItem,
+  MenuDivider, useColorModeValue, useColorMode, Stack, Heading, useBreakpointValue,
+} from '@chakra-ui/react';
 
 import MovieModal from '../MovieModal';
 import ReviewModal from '../ReviewModal';

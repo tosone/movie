@@ -1,5 +1,5 @@
-import { ChakraProps, chakra } from '@chakra-ui/react';
 import React from 'react';
+import { ChakraProps, chakra } from '@chakra-ui/react';
 
 function Wave({ color = 'purple', ...props }: ChakraProps): JSX.Element {
   return (

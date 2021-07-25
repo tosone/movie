@@ -1,16 +1,7 @@
-import React, { useState } from 'react';
-import {
-  IconButton,
-  Center,
-  Flex,
-  Text,
-  VStack,
-  Spinner,
-  AspectRatio,
-  Skeleton,
-} from '@chakra-ui/react';
 import Image from 'next/image';
+import React, { useState } from 'react';
 import { AddIcon } from '@chakra-ui/icons';
+import { IconButton, Center, Flex, Text, VStack, Spinner, AspectRatio, Skeleton } from '@chakra-ui/react';
 
 import { OMDBMovie } from '../../pages/api/movie-api';
 
@@ -28,13 +19,7 @@ function SkeletonImage({ result }: { result: OMDBMovie }) {
   );
 }
 
-export const SearchResults: React.FC<{
-  data: any;
-  loading: boolean;
-  error: any;
-  setSuccess: any;
-  setError: any;
-}> = ({ data, loading, error, setSuccess, setError }): React.ReactElement => {
+export const SearchResults: React.FC<{ data: any; loading: boolean; error: any; setSuccess: any; setError: any; }> = ({ data, loading, error, setSuccess, setError }): React.ReactElement => {
   const addMovie = async (movieID: string | undefined) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_APP_URI}/api/movie/`,

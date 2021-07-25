@@ -1,9 +1,3 @@
-import {
-  Container, SimpleGrid, Box, Flex, InputGroup, InputLeftElement,
-  Input, Button, Heading, Menu, MenuButton, MenuItem, MenuList,
-  chakra, useColorModeValue, useToast, useColorMode,
-  Stack, IconButton, Tooltip, useBreakpoint,
-} from '@chakra-ui/react';
 import Link from 'next/link';
 import 'react-toggle/style.css';
 import { NextSeo } from 'next-seo';
@@ -11,6 +5,12 @@ import { UserAuthType } from 'next-auth';
 import { useState, useEffect } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import { AiOutlineSearch } from 'react-icons/ai';
+import {
+  Container, SimpleGrid, Box, Flex, InputGroup, InputLeftElement,
+  Input, Button, Heading, Menu, MenuButton, MenuItem, MenuList,
+  chakra, useColorModeValue, useToast, useColorMode,
+  Stack, IconButton, Tooltip, useBreakpoint,
+} from '@chakra-ui/react';
 
 import Card from '../Card';
 import ReviewModal from '../ReviewModal';
@@ -24,10 +24,7 @@ interface CardGridProps {
   user: UserAuthType;
 }
 
-export const CardGrid: React.FC<CardGridProps> = ({
-  movies: unSortedMovies,
-  user,
-}): React.ReactElement => {
+export const CardGrid: React.FC<CardGridProps> = ({ movies: unSortedMovies, user }): React.ReactElement => {
   const bp = useBreakpoint();
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('recent');
@@ -134,32 +131,16 @@ export const CardGrid: React.FC<CardGridProps> = ({
                   Sort by...
                 </MenuButton>
                 <MenuList zIndex={998}>
-                  <MenuItem
-                    zIndex={999}
-                    isDisabled={sort === 'recent'}
-                    onClick={() => setSort('recent')}
-                  >
+                  <MenuItem zIndex={999} isDisabled={sort === 'recent'} onClick={() => setSort('recent')} >
                     Recent
                   </MenuItem>
-                  <MenuItem
-                    zIndex={999}
-                    isDisabled={sort === 'old'}
-                    onClick={() => setSort('old')}
-                  >
+                  <MenuItem zIndex={999} isDisabled={sort === 'old'} onClick={() => setSort('old')} >
                     Old
                   </MenuItem>
-                  <MenuItem
-                    zIndex={999}
-                    isDisabled={sort === 'best'}
-                    onClick={() => setSort('best')}
-                  >
+                  <MenuItem zIndex={999} isDisabled={sort === 'best'} onClick={() => setSort('best')} >
                     Best
                   </MenuItem>
-                  <MenuItem
-                    zIndex={999}
-                    isDisabled={sort === 'worst'}
-                    onClick={() => setSort('worst')}
-                  >
+                  <MenuItem zIndex={999} isDisabled={sort === 'worst'} onClick={() => setSort('worst')} >
                     Worst
                   </MenuItem>
                 </MenuList>
@@ -201,11 +182,7 @@ export const CardGrid: React.FC<CardGridProps> = ({
           </Stack>
         </Flex>
         {cardView ? (
-          <SimpleGrid
-            columns={{ base: 1, md: 2, lg: 3 }}
-            spacing={10}
-            alignItems="stretch"
-          >
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} alignItems="stretch" >
             {movies?.data?.map(
               (
                 movie: SerializedMovieType<ReviewType<PopulatedUserType>[]>,

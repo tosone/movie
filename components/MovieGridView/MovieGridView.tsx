@@ -1,43 +1,19 @@
-import {
-  AspectRatio,
-  Stack,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  Heading,
-  useColorModeValue,
-  Stat,
-  StatNumber,
-  chakra,
-  IconButton,
-  Tooltip,
-  VStack,
-  Text,
-  AvatarGroup,
-  Avatar,
-  useToast,
-  PopoverTrigger,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  Button,
-  PopoverHeader,
-  Skeleton,
-} from '@chakra-ui/react';
-import { UserAuthType } from 'next-auth';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import React, { ReactElement, useMemo } from 'react';
-import { CgDetailsMore } from 'react-icons/cg';
 import { FaImdb } from 'react-icons/fa';
-import { IoTrashBinOutline } from 'react-icons/io5';
-import { useQueryClient } from 'react-query';
+import { UserAuthType } from 'next-auth';
 import { useTable } from 'react-table';
+import { useRouter } from 'next/router';
+import { useQueryClient } from 'react-query';
+import { CgDetailsMore } from 'react-icons/cg';
+import { IoTrashBinOutline } from 'react-icons/io5';
+import React, { ReactElement, useMemo } from 'react';
+import {
+  AspectRatio, Stack, Table, Tbody, Td, Th, Thead, Tr, Heading, useColorModeValue,
+  Stat, StatNumber, chakra, IconButton, Tooltip, VStack, Text, AvatarGroup, Avatar,
+  useToast, PopoverTrigger, Popover, PopoverArrow, PopoverBody, PopoverCloseButton,
+  PopoverContent, Button, PopoverHeader, Skeleton,
+} from '@chakra-ui/react';
+
 import { SerializedMovieType } from '../../models/movie';
 
 interface Props {

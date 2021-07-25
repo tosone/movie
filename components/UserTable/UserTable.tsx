@@ -73,9 +73,8 @@ const Form = ({
       toast({
         variant: `top-accent`,
         title: `User ${resData.user.isBanned ? `Banned` : `Unbanned`}!`,
-        description: `${resData.user.username} was ${
-          resData.user.isBanned ? `banned` : `unbanned`
-        } successfully`,
+        description: `${resData.user.username} was ${resData.user.isBanned ? `banned` : `unbanned`
+          } successfully`,
         status: `success`,
         isClosable: true,
       });
@@ -214,16 +213,11 @@ interface TableUser {
   _id: string;
 }
 
-export const UserTable: React.FC<{
-  data: TableUser[] | undefined;
-}> = ({ data }): JSX.Element => {
+export const UserTable: React.FC<{ data: TableUser[] | undefined; }> = ({ data }): JSX.Element => {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const handlePromote = async (
-    promotion: 'admin' | 'reviewer',
-    user: string
-  ) => {
+  const handlePromote = async (promotion: 'admin' | 'reviewer', user: string) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_APP_URI}/api/user/`,
       { method: `put`, body: JSON.stringify({ promotion, user }) }
@@ -270,19 +264,14 @@ export const UserTable: React.FC<{
                   <Flex>
                     <Text fontSize="lg" fontWeight="semibold">
                       {row?.original?.username}
-                      <chakra.span
-                        color={useColorModeValue(`gray.400`, `gray.600`)}
-                      >
+                      <chakra.span color={useColorModeValue(`gray.400`, `gray.600`)} >
                         #{row?.original?.discriminator}
                       </chakra.span>
                     </Text>
                     <ExternalLinkIcon mx="5px" my="auto" />
                   </Flex>
                 </Link>
-                <Text
-                  fontSize="sm"
-                  color={useColorModeValue(`gray.400`, `gray.600`)}
-                >
+                <Text fontSize="sm" color={useColorModeValue(`gray.400`, `gray.600`)} >
                   {row?.original?.id}
                 </Text>
               </VStack>
@@ -303,9 +292,7 @@ export const UserTable: React.FC<{
         Cell: ({ row }: { row: { original: TableUser } }) => (
           <HStack justifyContent="center">
             <Tooltip
-              label={
-                row.original.isAdmin ? `Demote from admin` : `Promote to admin`
-              }
+              label={row.original.isAdmin ? `Demote from admin` : `Promote to admin`}
               placement="top"
             >
               <IconButton
@@ -321,19 +308,13 @@ export const UserTable: React.FC<{
               />
             </Tooltip>
             <Tooltip
-              label={
-                row.original.isReviewer
-                  ? `Demote from reviewer`
-                  : `Promote to reviewer`
-              }
+              label={row.original.isReviewer ? `Demote from reviewer` : `Promote to reviewer`}
               placement="top"
             >
               <IconButton
                 onClick={() => handlePromote(`reviewer`, row.original._id)}
                 aria-label={
-                  row.original.isReviewer
-                    ? `Demote from reviewer`
-                    : `Promote to reviewer`
+                  row.original.isReviewer ? `Demote from reviewer` : `Promote to reviewer`
                 }
                 colorScheme={row.original.isReviewer ? `red` : `green`}
                 variant="ghost"
