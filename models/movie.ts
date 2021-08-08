@@ -1,5 +1,6 @@
-import { Overwrite, PopulatedUserType } from './user';
 import mongoose, { Document, Model } from 'mongoose';
+
+import { Overwrite, PopulatedUserType } from './user';
 
 const reviewSchema = new mongoose.Schema(
   {

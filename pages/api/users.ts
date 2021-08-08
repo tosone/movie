@@ -6,10 +6,7 @@ type Data = {
   users: any;
 };
 
-const handler = async (
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-): Promise<void> => {
+const handler = async (req: NextApiRequest, res: NextApiResponse<Data>): Promise<void> => {
   await dbConnect();
   if (req.method === `GET`) {
     const users = await User.find({});

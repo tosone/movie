@@ -8,15 +8,13 @@ interface ReviewContext {
   onOpen: () => void;
   onClose: () => void;
   movie: null | SerializedMovieType<ReviewType<PopulatedUserType>[]>;
-  setMovie: Dispatch<
-    SetStateAction<SerializedMovieType<ReviewType<PopulatedUserType>[]> | null>
-  >;
+  setMovie: Dispatch<SetStateAction<SerializedMovieType<ReviewType<PopulatedUserType>[]> | null>>;
 }
 
 export const ReviewModalContext = React.createContext<ReviewContext>({
   isOpen: false,
-  onOpen: () => {},
-  onClose: () => {},
+  onOpen: () => { },
+  onClose: () => { },
   movie: null,
-  setMovie: () => {},
+  setMovie: () => { },
 });

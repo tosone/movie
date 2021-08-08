@@ -45,8 +45,7 @@ export interface LeanMongoUser {
 
 export type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
 
-export type SerializedUser = Overwrite<
-  LeanMongoUser,
+export type SerializedUser = Overwrite<LeanMongoUser,
   {
     createdAt: string;
     updatedAt: string;
